@@ -20,7 +20,11 @@ import {
 } from '@/components/ui/drawer'
 import VCardPreview from '@/components/VCardPreview.vue'
 import { IS_COPY_IMAGE_TO_CLIPBOARD_SUPPORTED } from '@/utils/clipboard'
-import { createRandomColor, getRandomItemInArray } from '@/utils/color'
+import {
+  createComplementaryColors,
+  extractDominantColorFromImage,
+  getRandomItemInArray
+} from '@/utils/color'
 import {
   copyImageToClipboard,
   downloadJpgElement,
@@ -179,7 +183,7 @@ const qrCodeProps = computed<StyledQRCodeProps>(() => ({
   qrOptions: qrOptions.value
 }))
 
-function randomizeStyleSettings() {
+async function randomizeStyleSettings() {
   const dotTypes: DotType[] = [
     'dots',
     'rounded',
@@ -192,15 +196,20 @@ function randomizeStyleSettings() {
   const cornerDotTypes: CornerDotType[] = ['dot', 'square']
 
   dotsOptionsType.value = getRandomItemInArray(dotTypes)
-  dotsOptionsColor.value = createRandomColor()
-
   cornersSquareOptionsType.value = getRandomItemInArray(cornerSquareTypes)
-  cornersSquareOptionsColor.value = createRandomColor()
-
   cornersDotOptionsType.value = getRandomItemInArray(cornerDotTypes)
-  cornersDotOptionsColor.value = createRandomColor()
 
-  styleBackground.value = createRandomColor()
+  // Use logo colors as base when a logo is present
+  let baseColor: string | undefined
+  if (image.value) {
+    baseColor = (await extractDominantColorFromImage(image.value)) ?? undefined
+  }
+
+  const colors = createComplementaryColors(baseColor)
+  dotsOptionsColor.value = colors.dots
+  cornersSquareOptionsColor.value = colors.cornersSquare
+  cornersDotOptionsColor.value = colors.cornersDot
+  styleBackground.value = colors.background
 }
 
 function uploadImage() {
