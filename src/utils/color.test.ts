@@ -112,16 +112,14 @@ describe('createComplementaryColors', () => {
   })
 
   it('background contrasts with dots (dark bg when dots are light, light bg when dots are dark)', () => {
-    // Input with lightness that stays > 50 after clamping (high lightness → dark background)
-    const lightColors = createComplementaryColors('#e8f4f8') // very light blue, l ≈ 94 → clamped to 60
+    // Input with l ≈ 94 → clamped to 60 (> 50), so expects dark background
+    const lightColors = createComplementaryColors('#e8f4f8') // very light blue
     const [, , bgL] = hexToHsl(lightColors.background)
-    // Background should be very dark (<= 20) when dots lightness is high
     expect(bgL).toBeLessThanOrEqual(20)
 
-    // Input with lightness that stays < 50 after clamping (low lightness → light background)
-    const darkColors = createComplementaryColors('#1a3a6a') // dark blue, l ≈ 25 → clamped to 30
+    // Input with l ≈ 25 → clamped to 30 (< 50), so expects light background
+    const darkColors = createComplementaryColors('#1a3a6a') // dark blue
     const [, , bgL2] = hexToHsl(darkColors.background)
-    // Background should be very light (>= 80) when dots lightness is low
     expect(bgL2).toBeGreaterThanOrEqual(80)
   })
 })
