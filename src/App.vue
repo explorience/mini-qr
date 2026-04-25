@@ -13,6 +13,7 @@ const { isDarkMode, isDarkModePreferenceSetBySystem, toggleDarkModePreference } 
   useDarkModePreference()
 
 const capturedData = ref<string>('')
+const showAboutModal = ref(false)
 const qrCodeScanRef = ref<InstanceType<typeof QRCodeScan> | null>(null)
 
 // #region Scroll-aware header
@@ -131,18 +132,18 @@ const isModeToggleDisabled = computed(() => {
 
       <div class="flex items-center justify-end gap-2">
         <a
-          class="icon-button"
+          class="flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           href="https://forestcitysolidarity.xyz"
           target="_blank"
-          :aria-label="t('GitHub repository for this project')"
+          rel="noopener noreferrer"
+          >FCS Website</a
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-            <path
-              fill="#abcbca"
-              d="M12.001 2c-5.525 0-10 4.475-10 10a9.994 9.994 0 0 0 6.837 9.488c.5.087.688-.213.688-.476c0-.237-.013-1.024-.013-1.862c-2.512.463-3.162-.612-3.362-1.175c-.113-.288-.6-1.175-1.025-1.413c-.35-.187-.85-.65-.013-.662c.788-.013 1.35.725 1.538 1.025c.9 1.512 2.337 1.087 2.912.825c.088-.65.35-1.087.638-1.337c-2.225-.25-4.55-1.113-4.55-4.938c0-1.088.387-1.987 1.025-2.688c-.1-.25-.45-1.275.1-2.65c0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337c1.913-1.3 2.75-1.024 2.75-1.024c.55 1.375.2 2.4.1 2.65c.637.7 1.025 1.587 1.025 2.687c0 3.838-2.337 4.688-4.563 4.938c.363.312.676.912.676 1.85c0 1.337-.013 2.412-.013 2.75c0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10Z"
-            />
-          </svg>
-        </a>
+        <button
+          class="flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          @click="showAboutModal = true"
+        >
+          About
+        </button>
         <button
           class="icon-button"
           @click="toggleDarkModePreference"
@@ -285,6 +286,62 @@ const isModeToggleDisabled = computed(() => {
       </div>
     </div>
     <AppFooter />
+
+    <!-- About Modal -->
+    <div
+      v-if="showAboutModal"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
+      @click.self="showAboutModal = false"
+    >
+      <div class="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl dark:bg-zinc-800">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">About FCS QR</h2>
+          <button
+            @click="showAboutModal = false"
+            class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <p class="mb-3 text-zinc-700 dark:text-zinc-300">
+          This free QR code generator is a community resource built and hosted by
+          <a
+            href="https://forestcitysolidarity.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-red-600 underline decoration-red-600"
+            >Forest City Solidarity</a
+          >
+          in London, Ontario.
+        </p>
+        <p class="mb-3 text-zinc-700 dark:text-zinc-300">
+          QR codes can be a bitch — most generators are covered in ads, charge for basic features,
+          or watermark your codes. This tool is free, open-source, and doesn't track you. Use it for
+          your events, organizing, mutual aid, or whatever you need.
+        </p>
+        <p class="text-sm text-zinc-500 dark:text-zinc-400">
+          Built on
+          <a
+            href="https://github.com/lyqht/mini-qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            >MiniQR</a
+          >
+          (GPL v3). Customized by FCS.
+        </p>
+      </div>
+    </div>
   </main>
 </template>
 
