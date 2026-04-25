@@ -5,6 +5,7 @@ import SpDigitalConfig from '@/assets/presets/spdigital.json'
 import GovtechStackCommunityConfig from '@/assets/presets/govtech_stack.json'
 import Hackomania2025Config from '@/assets/presets/hackomania2025.json'
 import PlainConfig from '@/assets/presets/plain.json'
+import FcsConfig from '@/assets/presets/fcs.json'
 import type { DrawType, Options as StyledQRCodeProps } from 'qr-code-styling'
 
 export interface CustomStyleProps {
@@ -245,6 +246,13 @@ export const vueJsPreset: Preset = {
 
 // Individual presets
 
+export const fcsPreset = {
+  ...defaultPresetOptions,
+  name: 'Forest City Solidarity',
+  ...FcsConfig.props,
+  style: FcsConfig.style
+} as Preset
+
 export const lyqhtPreset: Preset = {
   ...defaultPresetOptions,
   name: 'Default (lyqht)',
@@ -318,6 +326,7 @@ export const hackomania2025Preset = {
 } as Preset
 
 export const builtInPresets: Preset[] = [
+  fcsPreset,
   lyqhtPreset,
   plainPreset,
   ...[

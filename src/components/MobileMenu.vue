@@ -170,7 +170,7 @@ onUnmounted(() => {
         <!-- GitHub link -->
         <a
           class="flex items-center gap-2 rounded-md px-2 py-1.5 text-zinc-800 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-700"
-          href="https://github.com/lyqht/mini-qr"
+          href="https://forestcitysolidarity.xyz"
           target="_blank"
           :aria-label="t('GitHub repository for this project')"
         >

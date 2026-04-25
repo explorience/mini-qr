@@ -82,7 +82,7 @@ const isModeToggleDisabled = computed(() => {
       class="hidden md:mx-auto md:mb-4 md:mt-8 md:flex md:w-5/6 md:flex-row md:justify-between md:ps-4"
     >
       <div class="flex items-center">
-        <h1 class="text-3xl text-gray-700 dark:text-gray-100">MiniQR</h1>
+        <h1 class="text-3xl text-gray-700 dark:text-gray-100">FCS QR</h1>
 
         <!-- Mode toggle button - only visible on desktop -->
         <div
@@ -132,7 +132,7 @@ const isModeToggleDisabled = computed(() => {
       <div class="flex items-center justify-end gap-2">
         <a
           class="icon-button"
-          href="https://github.com/lyqht/mini-qr"
+          href="https://forestcitysolidarity.xyz"
           target="_blank"
           :aria-label="t('GitHub repository for this project')"
         >
@@ -290,20 +290,20 @@ const isModeToggleDisabled = computed(() => {
 
 <style lang="postcss" scoped>
 .vertical-border {
-  @apply h-8 bg-slate-300 dark:bg-slate-700 w-1;
+  @apply h-8 w-1 bg-slate-300 dark:bg-slate-700;
 }
 
 .icon-button {
   @apply p-1;
-  @apply outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 dark:focus-visible:ring-zinc-200 hover:shadow rounded-sm;
-  @apply text-zinc-900 dark:text-zinc-100 dark:bg-zinc-800;
+  @apply rounded-sm outline-none hover:shadow focus-visible:ring-1 focus-visible:ring-zinc-700 dark:focus-visible:ring-zinc-200;
+  @apply text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100;
 }
 
 .button {
-  @apply bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-200;
-  @apply shadow-sm hover:shadow p-2 focus-visible:shadow-md rounded-lg;
+  @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-200;
+  @apply rounded-lg p-2 shadow-sm hover:shadow focus-visible:shadow-md;
   @apply outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 dark:focus-visible:ring-zinc-200;
-  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 /* Scroll-aware header styles */
