@@ -261,11 +261,7 @@ watch(selectedPreset, () => {
   // Most presets don't have a frame, so we set it to false by default
 })
 
-const selectedPresetKey = ref<string>(
-  isLocalStorageEnabled() && hasStoredQRConfig()
-    ? LAST_LOADED_LOCALLY_PRESET_KEY
-    : defaultPreset.name
-)
+const selectedPresetKey = ref<string>(defaultPreset.name)
 const lastCustomLoadedPreset = ref<Preset>()
 watch(
   selectedPresetKey,
@@ -932,9 +928,7 @@ const updateDataFromModal = (newData: string) => {
 </script>
 
 <template>
-  <div
-    class="flex items-start justify-center gap-4 md:flex-row md:gap-6 lg:gap-12 lg:pb-0"
-  >
+  <div class="flex items-start justify-center gap-4 md:flex-row md:gap-6 lg:gap-12 lg:pb-0">
     <!-- Sticky sidebar on large screens -->
     <div
       v-if="isLarge"

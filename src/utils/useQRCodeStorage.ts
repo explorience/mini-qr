@@ -26,7 +26,7 @@ export const CUSTOM_LOADED_PRESET_KEYS = [
 ] as const
 
 export function isLocalStorageEnabled(): boolean {
-  return import.meta.env?.VITE_DISABLE_LOCAL_STORAGE !== 'true'
+  return false
 }
 
 export function hasStoredQRConfig(): boolean {
